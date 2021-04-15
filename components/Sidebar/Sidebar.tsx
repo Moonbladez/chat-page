@@ -5,6 +5,7 @@ import * as EmailValidator from "email-validator";
 
 import { Avatar, IconButton, Button } from "@material-ui/core";
 import React from "react";
+import { auth } from "../../firebase";
 
 export const Sidebar = () => {
   const Container = styled.div``;
@@ -54,7 +55,7 @@ export const Sidebar = () => {
   `;
 
   //HANDLERS
-  const createChat = () => {
+  const createChat = (): void => {
     const input = prompt("Please enter an email address for the user you wish to chat with");
 
     if (!input) {
@@ -69,7 +70,7 @@ export const Sidebar = () => {
   return (
     <Container>
       <Header>
-        <UserAvatar />
+        <UserAvatar onClick={() => auth.signOut()} />
         <IconsContainer>
           <IconButton>
             <MdChat />
