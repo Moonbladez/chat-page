@@ -40,7 +40,7 @@ export const ChatScreen = ({ chat, messages }): JSX.Element => {
 
   useEffect(() => {
     scrollToBottom();
-  });
+  }, [endOfMessagesRef]);
 
   //HANDLERS
   const showMessages = () => {
