@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { auth, db } from "../../firebase";
@@ -15,6 +15,7 @@ import {
   MessageContainer,
   Input,
   EndOfMessage,
+  StartOfMessage,
   InputContainer,
 } from "./ChatScreenStyling";
 import { GrMoreVertical } from "react-icons/gr";
@@ -35,6 +36,11 @@ export const ChatScreen = ({ chat, messages }): JSX.Element => {
   const [recipientSnapshot] = useCollection(
     db.collection("users").where("email", "==", getRecipientEmail(chat.users, user))
   );
+  const endOfMessagesRef = useRef(null);
+
+  useEffect(() => {
+    scrollToBottom();
+  });
 
   //HANDLERS
   const showMessages = () => {
@@ -61,6 +67,13 @@ export const ChatScreen = ({ chat, messages }): JSX.Element => {
     setInput(event.target.value);
   };
 
+  const scrollToBottom = () => {
+    endOfMessagesRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   const sendMessage = (event) => {
     event.preventDefault();
     //when user sends message, update last seen
@@ -82,6 +95,7 @@ export const ChatScreen = ({ chat, messages }): JSX.Element => {
     setInput("");
 
     //scroll to bottom
+    scrollToBottom();
   };
 
   const recipient = recipientSnapshot?.docs?.[0]?.data();
@@ -113,8 +127,9 @@ export const ChatScreen = ({ chat, messages }): JSX.Element => {
         </HeaderIcons>
       </Header>
       <MessageContainer>
+        <StartOfMessage />
         {showMessages()}
-        <EndOfMessage />
+        <EndOfMessage ref={endOfMessagesRef} />
       </MessageContainer>
       <InputContainer>
         <MdInsertEmoticon />

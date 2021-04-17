@@ -35,7 +35,13 @@ export const MessageContainer = styled.div`
   min-height: 90vh;
 `;
 
-export const EndOfMessage = styled.div``;
+export const StartOfMessage = styled.div`
+  margin-top: 50px;
+`;
+
+export const EndOfMessage = styled.div`
+  margin-bottom: 50px;
+`;
 
 export const Message = styled.div`
   border: 1px solid red;
