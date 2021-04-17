@@ -22,6 +22,13 @@ export default function ChatPage({ chat, messages }) {
   );
 }
 
+interface Messages {
+  id: string;
+  user: string;
+  timestamp: any;
+  photoURL: string;
+}
+
 export async function getServerSideProps(context) {
   const ref = db.collection("chats").doc(context.query.id);
 
@@ -33,10 +40,13 @@ export async function getServerSideProps(context) {
       id: doc.id,
       ...doc.data(),
     }))
-    .map((messages) => ({
-      ...messages,
-      timestamp: messages.timestamp.toDate().getTime(),
-    }));
+    .map((messages: Messages) => {
+      return {
+        ...messages,
+        timestamp: messages.timestamp.toDate().getTime(),
+      };
+    });
+  console.log(messages);
 
   // Prep the Chats...
   const chatRes = await ref.get();
