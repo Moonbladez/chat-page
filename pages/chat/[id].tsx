@@ -1,12 +1,20 @@
 import { auth, db } from "../../firebase";
-import styled from "styled-components";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { ChatScreen } from "../../components/ChatScreen";
 import Head from "next/head";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getRecipientEmail } from "../../utils/getRecipientEmail";
 
+import { Container, ChatContainer } from "./ChatPageStyles";
+
 export default function ChatPage({ chat, messages }) {
+  interface Messages {
+    id: string;
+    user: string;
+    timestamp: any;
+    photoURL: string;
+  }
+
   const [user] = useAuthState(auth);
 
   return (
@@ -20,13 +28,6 @@ export default function ChatPage({ chat, messages }) {
       </ChatContainer>
     </Container>
   );
-}
-
-interface Messages {
-  id: string;
-  user: string;
-  timestamp: any;
-  photoURL: string;
 }
 
 export async function getServerSideProps(context) {
@@ -46,7 +47,6 @@ export async function getServerSideProps(context) {
         timestamp: messages.timestamp.toDate().getTime(),
       };
     });
-  console.log(messages);
 
   // Prep the Chats...
   const chatRes = await ref.get();
@@ -62,20 +62,3 @@ export async function getServerSideProps(context) {
     },
   };
 }
-
-const Container = styled.div`
-  display: flex;
-  box-shadow: 1px 1px 4px -1px rgba(0, 0, 0, 0.75);
-`;
-
-const ChatContainer = styled.div`
-  flex: 1;
-  overflow: scroll;
-  height: 100vh;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-`;

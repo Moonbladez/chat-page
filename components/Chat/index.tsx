@@ -4,24 +4,8 @@ import { auth, db } from "../../firebase";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
-import styled from "styled-components";
 
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  padding: 1rem;
-  word-break: break-word;
-  :hover {
-    background-color: #e9eaeb;
-  }
-`;
-
-const UserAvatar = styled(Avatar)`
-  margin: 5px;
-  margin-right: 1rem;
-  background-color: ${(props) => (props.color ? props.color : "rebeccapurple")};
-`;
+import { Container, UserAvatar } from "./ChatStyles";
 
 export const Chat = ({ id, users }): JSX.Element => {
   const router = useRouter();
