@@ -100,7 +100,6 @@ export const ChatScreen = ({ chat, messages }): JSX.Element => {
 
   const recipient = recipientSnapshot?.docs?.[0]?.data();
   const recipientEmail = getRecipientEmail(chat.users, user);
-  console.log(recipient.lastSeen.toDate());
   return (
     <Container>
       <Header>

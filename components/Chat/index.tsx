@@ -14,22 +14,21 @@ export const Chat = ({ id, users }): JSX.Element => {
   const [recipientSnapshot] = useCollection(
     db.collection("users").where("email", "==", getRecipientEmail(users, user))
   );
+  const recipientEmail = getRecipientEmail(users, user);
+
+  const recipient = recipientSnapshot?.docs?.[0]?.data();
 
   //HANDLERS
   const enterChat = () => {
     router.push(`/chat/${id}`);
   };
-  const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-  const recipientEmail = getRecipientEmail(users, user);
-
-  const recipient = recipientSnapshot?.docs?.[0]?.data();
 
   return (
     <Container onClick={enterChat}>
       {recipient ? (
         <UserAvatar src={recipient?.photoURL} />
       ) : (
-        <UserAvatar color={randomColor}>{recipientEmail[0]}</UserAvatar>
+        <UserAvatar color={"#7B1FA2"}>{recipientEmail[0].toUpperCase()}</UserAvatar>
       )}
       <p>{recipientEmail}</p>
     </Container>
