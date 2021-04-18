@@ -8,13 +8,6 @@ import { getRecipientEmail } from "../../utils/getRecipientEmail";
 import { Container, ChatContainer } from "./ChatPageStyles";
 
 export default function ChatPage({ chat, messages }) {
-  interface Messages {
-    id: string;
-    user: string;
-    timestamp: any;
-    photoURL: string;
-  }
-
   const [user] = useAuthState(auth);
 
   return (
@@ -28,6 +21,13 @@ export default function ChatPage({ chat, messages }) {
       </ChatContainer>
     </Container>
   );
+}
+
+interface Messages {
+  id: string;
+  user: string;
+  timestamp: any;
+  photoURL: string;
 }
 
 export async function getServerSideProps(context) {

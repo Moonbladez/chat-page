@@ -100,7 +100,7 @@ export const ChatScreen = ({ chat, messages }): JSX.Element => {
 
   const recipient = recipientSnapshot?.docs?.[0]?.data();
   const recipientEmail = getRecipientEmail(chat.users, user);
-
+  console.log(recipient.lastSeen.toDate());
   return (
     <Container>
       <Header>
@@ -109,9 +109,8 @@ export const ChatScreen = ({ chat, messages }): JSX.Element => {
           <h3>{recipientEmail}</h3>
           {recipientSnapshot ? (
             <p>
-              {`Last active : ${
-                recipient?.lastSeen?.toDate() ? <TimeAgo datetime={recipient?.lastSeen?.toDate()} /> : "Unavailable"
-              }`}
+              Last active:{` `}
+              {recipient?.lastSeen?.toDate() ? <TimeAgo datetime={recipient?.lastSeen?.toDate()} /> : "Unavailable"}
             </p>
           ) : (
             <p>Loading Last active...</p>
