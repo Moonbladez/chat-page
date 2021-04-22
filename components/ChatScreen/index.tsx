@@ -108,7 +108,7 @@ export const ChatScreen = ({ chat, messages }): JSX.Element => {
           <h3>{recipientEmail}</h3>
           {recipientSnapshot ? (
             <p>
-              Last active:{` `}
+              Last active:
               {recipient?.lastSeen?.toDate() ? <TimeAgo datetime={recipient?.lastSeen?.toDate()} /> : "Unavailable"}
             </p>
           ) : (
