@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+const Container = styled.div`
   display: flex;
   box-shadow: 1px 1px 4px -1px rgba(0, 0, 0, 0.75);
 `;
 
-export const ChatContainer = styled.div`
+const ChatContainer = styled.div`
   flex: 1;
   overflow: scroll;
   height: 100vh;
@@ -16,3 +16,5 @@ export const ChatContainer = styled.div`
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 `;
+
+export { ChatContainer, Container };

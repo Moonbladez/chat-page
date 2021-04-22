@@ -5,7 +5,7 @@ import Head from "next/head";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getRecipientEmail } from "../../utils/getRecipientEmail";
 
-import { Container, ChatContainer } from "./ChatPageStyles";
+import { Container, ChatContainer } from "../../styles/ChatPageStyles";
 
 export default function ChatPage({ chat, messages }) {
   const [user] = useAuthState(auth);
